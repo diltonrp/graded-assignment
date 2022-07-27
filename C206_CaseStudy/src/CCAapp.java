@@ -16,21 +16,17 @@ import java.time.LocalTime;
  *
  */
 public class CCAapp {
+	
+	public static ArrayList<Student> studentList = new ArrayList<Student>();
+	public static ArrayList<teacher> teacherList = new ArrayList<teacher>();
+	public static ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		start();
 	}
 	
-	/**
-	 * 
-	 */
-	private static void start() {
-		// TODO Auto-generated method stub
-		ArrayList<Student> studentList = new ArrayList<Student>();
-		ArrayList<teacher> teacherList = new ArrayList<teacher>();
-		ArrayList<CCA> ccaList = new ArrayList<CCA>();
-
+	public static void addingToArrayList() {
 		studentList.add(new Student(21000000, "T0123456A", "Mark", "mark@gmail.com", 88888888, "DIT", "W67N", ""));
 		studentList.add(new Student(21000001, "T0184637B", "Jack", "jack@gmail.com", 88888887, "DIT", "W67N", ""));
 		studentList.add(new Student(21000002, "T0128475C", "Mary", "mary@gmail.com", 88888886, "DIT", "W67N", ""));
@@ -42,37 +38,60 @@ public class CCAapp {
 		ccaList.add(new CCA(3, "Chorale", "Sing on stage!", "16:00", "Monday", "Performing Arts"));
 		ccaList.add(new CCA(4, "Basketball", "Play basketball!", "15:00", "Monday", "Sports"));
 		ccaList.add(new CCA(5, "Orchestra", "Play your desired instrument", "15:30", "Wednesday", "Performing Arts"));
-		
+	}
+	
+	public static void introduction() {
 		Helper.line(80, "=");
 		System.out.println("CCA APP");
 		Helper.line(80, "=");
+	}
+	
+	public static int role() {
+		System.out.println("Please select your role");
 		System.out.println("Students Enter 1");
 		System.out.println("Teachers Enter 2");
-		int opt = Helper.readInt("Student or Teacher > ");
-		if (opt == 1) {
-			int opt3 = 0;
-			while (opt3 != 4) {
-				menu1();
-				opt3 = Helper.readInt("Enter an option > ");
-				if (opt3 == 1) {
+		int roleOption = Helper.readInt("Student (1) or Teacher (2) > ");
+		return roleOption;
+	}
+	
+	private static void start() {	
+		// TODO Auto-generated method stub
+		
+		addingToArrayList();
+		introduction();
+		
+		int roleOption = role();
+		
+		menu1();
+		
+		if (roleOption == 1) {
+			int studentOption = 0;
+			while (studentOption != 4) {
+				
+				studentOption = Helper.readInt("Enter an option > ");
+				if (studentOption == 1) {
 					viewAll(ccaList);
 				}
-				else if (opt3 == 2) {
+				else if (studentOption == 2) {
 					viewByCCACategory(ccaList);
 				}
-				else if (opt3 == 3) {
+				else if (studentOption == 3) {
 					selectCCA(ccaList, studentList);
+				} else if (studentOption == 4) {
+					System.out.println("Good bye!");
+				} else {
+					System.out.println("Please choose a valid input");
 				}
 			}	
 		}
-		else if (opt == 2) {
+		else if (roleOption == 2) {
 			Helper.line(80, "=");
 			System.out.println("ENTER ID AND PASSWORD");
 			Helper.line(80, "=");
-			int id = Helper.readInt("Enter Teacher's ID > ");
-			String pass = Helper.readString("Enter Teacher's Password > ");
+			int teacherId = Helper.readInt("Enter Teacher's ID > ");
+			String teacherPassword = Helper.readString("Enter Teacher's Password > ");
 			for (int i = 0; i < teacherList.size(); i++) {
-				if (id == teacherList.get(i).gettId() || pass == teacherList.get(i).gettPassword()) {
+				if (teacherId == teacherList.get(i).gettId() || teacherPassword == teacherList.get(i).gettPassword()) {
 					int opt2 = 0;
 					while (opt2 != 8) {
 						menu();
