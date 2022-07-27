@@ -202,6 +202,7 @@ public class CCAapp {
 				for (int i = 0; i < ccaList.size(); i++) {
 					if (ccaId == ccaList.get(i).getId()) {
 						studentList.get(i).setsCCA(ccaList.get(i).getCcaNames());
+						//studentList.add(new Student( sId, sIc,sName,sEmail,sContactNumber,moduleSelected,sClass,sCCA));
 						System.out.println("CCA Selected!");
 					}
 				}
