@@ -74,7 +74,7 @@ public class CCAapp {
 			for (int i = 0; i < teacherList.size(); i++) {
 				if (id == teacherList.get(i).gettId() || pass == teacherList.get(i).gettPassword()) {
 					int opt2 = 0;
-					while (opt2 != 7) {
+					while (opt2 != 8) {
 						menu();
 						opt2 = Helper.readInt("Enter an option > ");
 						if (opt2 == 1) {
@@ -94,6 +94,9 @@ public class CCAapp {
 						}
 						else if (opt2 == 6) {
 							broadCastMessage(ccaList);
+						}
+						else if (opt2 == 7) {
+							viewStudent(studentList);
 						}
 					}
 					break;
@@ -120,7 +123,8 @@ public class CCAapp {
 		System.out.println("4. Remove CCA");
 		System.out.println("5. broadCastEmail");
 		System.out.println("6. broadCastMessage");
-		System.out.println("7. Quit");
+		System.out.println("7. View All Students");
+		System.out.println("8. Quit");
 	}
 	private static void menu1() {
 		Helper.line(80, "=");
@@ -203,5 +207,15 @@ public class CCAapp {
 				}
 			}
 		}
+	}
+	
+	private static void viewStudent(ArrayList<Student> studentList) {
+		String output = "";
+		output += String.format("%-10s %-10s %-15s %-30s %-10s %-10s %-10s %-15s\n", "ID", "IC", "NAME", "EMAIL", "NUMBER", "MODULE", "CLASS", "CCA");
+		for (int i = 0; i < studentList.size(); i++) {
+			output += String.format("%-10d %-10s %-15s %-30s %-10d %-10s %-10s %-15s\n", studentList.get(i).getsId(), studentList.get(i).getsIc(), studentList.get(i).getsName(),
+					studentList.get(i).getsEmail(), studentList.get(i).getsContactNumber(), studentList.get(i).getModuleSelected(), studentList.get(i).getsClass(), studentList.get(i).getsCCA());
+		}
+		System.out.println(output);
 	}
 }
