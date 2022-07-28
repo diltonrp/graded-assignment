@@ -64,7 +64,6 @@ public class CCAapp {
 		
 		if (roleOption == 1) {
 			
-			// Dilton: Programming team please change below to "while (studentOption != 4)"
 			studentMenu();
 			int studentOption = -1;
 			studentOption = Helper.readInt("Enter an option > ");
