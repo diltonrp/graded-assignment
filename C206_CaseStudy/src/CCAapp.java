@@ -62,13 +62,12 @@ public class CCAapp {
 		
 		int roleOption = role();
 		
-		menu1();
 		
 		if (roleOption == 1) {
 			int studentOption = 0;
-			while (studentOption != 4) {
-				
-				studentOption = Helper.readInt("Enter an option > ");
+			menu1();
+			studentOption = Helper.readInt("Enter an option > ");
+			if (studentOption != 4) {
 				if (studentOption == 1) {
 					viewAll(ccaList);
 				}
