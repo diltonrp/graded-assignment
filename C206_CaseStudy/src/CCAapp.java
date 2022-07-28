@@ -76,6 +76,10 @@ public class CCAapp {
 				if (teacherId == teacherList.get(i).gettId() && teacherPassword.equals(teacherList.get(i).gettPassword())) {
 					startTeacher();
 				}
+				else {
+					System.out.println("Wrong ID or Password!");
+					break;
+				}
 			}
 		}
 	}
