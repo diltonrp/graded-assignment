@@ -63,27 +63,28 @@ public class CCAapp {
 		int roleOption = role();
 		
 		if (roleOption == 1) {
-			int studentOption = 0;
+			
 			// Dilton: Programming team please change below to "while (studentOption != 4)"
 			studentMenu();
-			studentOption = -1;
+			int studentOption = -1;
 			studentOption = Helper.readInt("Enter an option > ");
 			
 			while (studentOption != 4) {
 				
 				if (studentOption == 1) {
 					viewAll(ccaList);
-				}
-				else if (studentOption == 2) {
+				} else if (studentOption == 2) {
 					viewByCCACategory(ccaList);
-				}
-				else if (studentOption == 3) {
+				} else if (studentOption == 3) {
 					selectCCA(ccaList, studentList);
 				} else if (studentOption == 4) {
 					System.out.println("Good bye!");
 				} else {
 					System.out.println("Please choose a valid input");
 				}
+				
+				studentMenu();
+				studentOption = Helper.readInt("Enter an option > ");
 			}	
 		}
 		else if (roleOption == 2) {
@@ -158,8 +159,7 @@ public class CCAapp {
 	}
 	
 	private static void viewAll(ArrayList<CCA> ccaList) {
-		String output = "";
-		output += String.format("%-5s %-10s %-40s %-10s %-15s %-10s\n", "ID", "NAME", "DESCRIPTION", "START TIME", "CCA DAY", "CATEGORY");
+		String output = String.format("%-5s %-10s %-40s %-10s %-15s %-10s\n", "ID", "NAME", "DESCRIPTION", "START TIME", "CCA DAY", "CATEGORY");
 		for (int i = 0; i < ccaList.size(); i++) {
 			output += String.format("%-5d %-10s %-40s %-10s %-15s %-10s\n", ccaList.get(i).getId(), ccaList.get(i).getCcaNames(),
 					ccaList.get(i).getCcaDescription(), ccaList.get(i).getCcaStartTime(), ccaList.get(i).getccaDay(), ccaList.get(i).getCategory());
