@@ -64,10 +64,10 @@ public class CCAapp {
 		
 		if (roleOption == 1) {
 			int studentOption = 0;
-			studentMenu();
-			studentOption = Helper.readInt("Enter an option > ");
 			// Dilton: Programming team please change below to "while (studentOption != 4)"
-			if (studentOption != 4) {
+			studentMenu();
+			while (studentOption != 4) {
+				studentOption = Helper.readInt("Enter an option > ");
 				if (studentOption == 1) {
 					viewAll(ccaList);
 				}
