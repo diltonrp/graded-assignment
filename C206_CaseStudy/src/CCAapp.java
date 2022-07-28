@@ -66,8 +66,11 @@ public class CCAapp {
 			int studentOption = 0;
 			// Dilton: Programming team please change below to "while (studentOption != 4)"
 			studentMenu();
+			studentOption = -1;
+			studentOption = Helper.readInt("Enter an option > ");
+			
 			while (studentOption != 4) {
-				studentOption = Helper.readInt("Enter an option > ");
+				
 				if (studentOption == 1) {
 					viewAll(ccaList);
 				}
