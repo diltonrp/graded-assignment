@@ -62,7 +62,7 @@ public class CCAapp {
 		
 		int roleOption = role();
 		
-		menu1();
+		menu1(); // don't write menu1, write what kind of menu
 		
 		if (roleOption == 1) {
 			int studentOption = 0;
