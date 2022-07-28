@@ -250,11 +250,6 @@ public class CCAapp {
 				} else {
 					System.out.println("Wrong ID or Password!");
 				}
-			}
-		}
+	}
+}
 
-<<<<<<< HEAD
-	
-=======
-	
->>>>>>> branch 'master' of https://github.com/diltonrp/graded-assignment.git
