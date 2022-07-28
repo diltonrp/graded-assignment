@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.time.LocalTime;
 
-// Hello
+
 
 /**
  * I declare that this code was written by me.
@@ -253,4 +253,8 @@ public class CCAapp {
 			}
 		}
 
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> branch 'master' of https://github.com/diltonrp/graded-assignment.git
