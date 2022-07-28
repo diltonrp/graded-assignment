@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.time.LocalTime;
 
-
+// Hello
 
 /**
  * I declare that this code was written by me.
@@ -23,6 +23,7 @@ public class CCAapp {
 		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		addingToArrayList();
 		start();
 	}
 	
@@ -56,97 +57,45 @@ public class CCAapp {
 	
 	private static void start() {	
 		// TODO Auto-generated method stub
-		
-		addingToArrayList();
 		introduction();
 		
 		int roleOption = role();
 		
-		if (roleOption == 1) {
+		if (roleOption == 1) { // login as student
+
+			startStudent();
 			
-			// Dilton: Programming team please change below to "while (studentOption != 4)"
-			studentMenu();
-			int studentOption = -1;
-			studentOption = Helper.readInt("Enter an option > ");
-			
-			while (studentOption != 4) {
-				
-				if (studentOption == 1) {
-					viewAll(ccaList);
-				} else if (studentOption == 2) {
-					viewByCCACategory(ccaList);
-				} else if (studentOption == 3) {
-					selectCCA(ccaList, studentList);
-				} else if (studentOption == 4) {
-					System.out.println("Good bye!");
-				} else {
-					System.out.println("Please choose a valid input");
-				}
-				
-				studentMenu();
-				studentOption = Helper.readInt("Enter an option > ");
-			}	
 		}
-		else if (roleOption == 2) {
+		else if (roleOption == 2) { // login as teacher
 			Helper.line(80, "=");
 			System.out.println("ENTER ID AND PASSWORD");
 			Helper.line(80, "=");
 			int teacherId = Helper.readInt("Enter Teacher's ID > ");
 			String teacherPassword = Helper.readString("Enter Teacher's Password > ");
 			for (int i = 0; i < teacherList.size(); i++) {
-				if (teacherId == teacherList.get(i).gettId() || teacherPassword == teacherList.get(i).gettPassword()) {
-					int opt2 = 0;
-					while (opt2 != 8) {
-						teacherMenu();
-						opt2 = Helper.readInt("Enter an option > ");
-						if (opt2 == 1) {
-							viewAll(ccaList);
-						} 
-						else if (opt2 == 2){
-							viewByCCACategory(ccaList);
-						}
-						else if (opt2 == 3) {
-							addCCA(ccaList);
-						}
-						else if (opt2 == 4) {
-							removeCCA(ccaList);
-						}
-						else if (opt2 == 5) {
-							broadCastEmail(ccaList);
-						}
-						else if (opt2 == 6) {
-							broadCastMessage(ccaList);
-						}
-						else if (opt2 == 7) {
-							viewStudent(studentList);
-						}
-					}
-					break;
+				if (teacherId == teacherList.get(i).gettId() && teacherPassword.equals(teacherList.get(i).gettPassword())) {
+					startTeacher();
 				}
 				else {
 					System.out.println("Wrong ID or Password!");
+					break;
 				}
 			}
-	
-			
 		}
-		
-		
-		
 	}
 
 	private static void teacherMenu() {
 		Helper.line(80, "=");
 		System.out.println("WELCOME TEACHERS!");
 		Helper.line(80, "=");
-		System.out.println("1. View All CCA Category");
+		System.out.println("1. View All CCA");
 		System.out.println("2. View CCA by Category");
 		System.out.println("3. Add New CCA");
 		System.out.println("4. Remove CCA");
 		System.out.println("5. broadCastEmail");
 		System.out.println("6. broadCastMessage");
 		System.out.println("7. View All Students");
-		System.out.println("8. Quit");
+		System.out.println("8. Log Out");
 	}
 	private static void studentMenu() {
 		Helper.line(80, "=");
@@ -155,7 +104,7 @@ public class CCAapp {
 		System.out.println("1. View All CCA");
 		System.out.println("2. View CCA by Category");
 		System.out.println("3. Select a CCA");
-		System.out.println("4. Quit");
+		System.out.println("4. Log Out");
 	}
 	
 	private static void viewAll(ArrayList<CCA> ccaList) {
@@ -222,11 +171,12 @@ public class CCAapp {
 				
 				for (int i = 0; i < ccaList.size(); i++) {
 					if (ccaId == ccaList.get(i).getId()) {
-						studentList.get(i).setsCCA(ccaList.get(i).getCcaNames());
-						//studentList.add(new Student( sId, sIc,sName,sEmail,sContactNumber,moduleSelected,sClass,sCCA));
+						studentList.get(i).setsCCA(ccaList.get(i).getCcaNames());;
 						System.out.println("CCA Selected!");
+						break;
 					}
 				}
+				break;
 			}
 		}
 	}
@@ -240,4 +190,67 @@ public class CCAapp {
 		}
 		System.out.println(output);
 	}
-}
+	
+	private static void startStudent() {
+		int studentOption = -1;
+		studentMenu();
+		studentOption = Helper.readInt("Enter an option > ");
+		
+		if (studentOption == 1) {
+			viewAll(ccaList);
+			startStudent();
+		} else if (studentOption == 2) {
+			viewByCCACategory(ccaList);
+			startStudent();
+		} else if (studentOption == 3) {
+			selectCCA(ccaList, studentList);
+			startStudent();
+		} else if (studentOption == 4) {
+			start();
+		} else {
+			System.out.println("Please choose a valid input");
+		}
+	}
+	
+	private static void startTeacher() {
+				int teacherOption = 0;
+				teacherMenu();
+				teacherOption = Helper.readInt("Enter an option > ");
+				
+				if (teacherOption == 1) {
+					viewAll(ccaList);
+					startTeacher();
+				} 
+				else if (teacherOption == 2){
+					viewByCCACategory(ccaList);
+					startTeacher();
+				}
+				else if (teacherOption == 3) {
+					addCCA(ccaList);			
+					startTeacher();
+				}
+				else if (teacherOption == 4) {
+					removeCCA(ccaList);			
+					startTeacher();
+				}
+				else if (teacherOption == 5) {
+					broadCastEmail(ccaList);
+					startTeacher();
+				}
+				else if (teacherOption == 6) {
+					broadCastMessage(ccaList);
+					startTeacher();
+				}
+				else if (teacherOption == 7) {
+					viewStudent(studentList);	
+					startTeacher();
+				}
+				else if (teacherOption == 8) {
+					start();
+				} else {
+					System.out.println("Wrong ID or Password!");
+				}
+			}
+		}
+
+	
