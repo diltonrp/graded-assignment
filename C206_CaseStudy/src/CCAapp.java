@@ -62,10 +62,9 @@ public class CCAapp {
 		
 		int roleOption = role();
 		
-		
 		if (roleOption == 1) {
 			int studentOption = 0;
-			menu1();
+			studentMenu();
 			studentOption = Helper.readInt("Enter an option > ");
 			if (studentOption != 4) {
 				if (studentOption == 1) {
@@ -93,7 +92,7 @@ public class CCAapp {
 				if (teacherId == teacherList.get(i).gettId() || teacherPassword == teacherList.get(i).gettPassword()) {
 					int opt2 = 0;
 					while (opt2 != 8) {
-						menu();
+						teacherMenu();
 						opt2 = Helper.readInt("Enter an option > ");
 						if (opt2 == 1) {
 							viewAll(ccaList);
@@ -131,7 +130,7 @@ public class CCAapp {
 		
 	}
 
-	private static void menu() {
+	private static void teacherMenu() {
 		Helper.line(80, "=");
 		System.out.println("WELCOME TEACHERS!");
 		Helper.line(80, "=");
@@ -144,7 +143,7 @@ public class CCAapp {
 		System.out.println("7. View All Students");
 		System.out.println("8. Quit");
 	}
-	private static void menu1() {
+	private static void studentMenu() {
 		Helper.line(80, "=");
 		System.out.println("WELCOME STUDENTS!");
 		Helper.line(80, "=");
