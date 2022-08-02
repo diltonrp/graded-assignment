@@ -127,32 +127,192 @@ public class CCAMain {
 	private static void roleMenu() {
 		System.out.println("I am a...");
 		System.out.println("1. Teacher");
-		System.out.println("2. Student");
-		System.out.println("3. Parent");
-		System.out.println("4. I want to quit");
+		System.out.println("2. CCA Instructor");
+		System.out.println("3. Student");
+		System.out.println("4. Parent");
+		System.out.println("5. I want to quit");
 		int roleSelection = Helper.readInt("Input your selection (1, 2, 3 or 4) > ");
 		
 		while (roleSelection != 4) {
-			if (roleSelection == 1) {
-				teacherMenu();
-			} else if (roleSelection == 2) {
-				
+			if (roleSelection == 1) { // teacher
+				verifyRole("teacher");
+			} else if (roleSelection == 2) { // cca instructor
+				verifyRole("instructor");
+			} else if (roleSelection == 3) { // student
+				studentMenu();
+			} else if (roleSelection == 4) { // parent
+				parentMenu();
+			} else if (roleSelection == 5) { // quit
+				System.out.println("Thank you for using our app!");
+			} else { // friendly error message
+				System.out.println("Please enter a valid input");
+				System.out.println("I am a...");
+				System.out.println("1. Teacher");
+				System.out.println("2. CCA Instructor");
+				System.out.println("3. Student");
+				System.out.println("4. Parent");
+				System.out.println("5. I want to quit");
+				roleSelection = Helper.readInt("Input your selection (1, 2, 3 or 4) > ");
 			}
 		}
 		
 	}
 	
 	private static void teacherMenu() {
-		//
-		System.out.println("Hi " + nameOfTeacher);
-		System.out.println("1. View all students");
-		System.out.println("2. View students with CCA");
-		System.out.println("3. View students with no CCA");
-		System.out.println("4. Logout");
 		
-		int teacherSelection = Helper.readInt("Please select (1, 2, 3 or 4) > ");
+		String[] menuItems = {"View all students", "View all students with CCA", "Add student", "Delete student", "View all CCA categories", "Add CCA category", "Delete CCA category", "View registered parents", "Add parent", "Delete parent", "Add student for CCA", "Back to home"};
+
+		int i = 1;
+		for (String item : menuItems) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
 		
-		if (teacherSelection == 1)
+		int teacherSelection = Helper.readInt("Please select your option > ");
+		
+		switch (teacherSelection) {
+		case 1: // View all students
+			viewAllStudents();
+			break;
+		
+		case 2: // View all students with CCA
+			viewStudentsRegisteredForCCA();
+			break;
+			
+		case 3: // Add student
+			
+			break;
+			
+		case 4: // Delete student 
+			break;
+			
+		case 5: // View all CCA categories
+			break;
+			
+		case 6: // Add CCA category
+			break;
+			
+		case 7: // Delete CCA category
+			break;
+			
+		case 8: // View registered parents
+			break;
+			
+		case 9: // Add parents
+			break;
+			
+		case 10: // Delete parents
+			break;
+			
+		case 11: // Add students for CCA
+			break;
+			
+		case 12: // Back to home
+			roleMenu();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	
+	private static void instructorMenu() {
+		String[] menu = {"View students for their CCA", "Delete students", "View registered parents for your CCA", "Back to home"};
+		int i = 1;
+		
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
+		
+		int instructorSelection = Helper.readInt("Please select your option > ");
+		
+		switch (instructorSelection) {
+		case 1: // View students for their CCA
+			
+			break;
+			
+		case 2: // Delete students
+			break;
+				
+		case 3: // View registered parents for your CCA
+			break;
+			
+		case 4: // Back to home
+			roleMenu();
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private static void studentMenu() {
+		
+	}
+	
+	private static void parentMenu() {
+		
+	}
+	
+	//-------------------------------------------Verification-------------------------------------
+	private static void verifyRole(String role) {
+		int idInput = Helper.readInt("Enter your id > ");
+		String passwordInput = Helper.readString("Enter your password > ");
+		int incorrectChoice = -1;
+		
+		
+		try {
+			
+			String sql;
+			
+			if (role == "teacher") {
+				sql = "SELECT id, password FROM teacher_list";
+				rs = statement.executeQuery(sql);
+				
+				while (rs.next()) {
+					while (incorrectChoice != 2) {
+						if (rs.getInt("id") == idInput && rs.getString("password").equals(passwordInput)) {
+							teacherMenu();
+						} else {
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)?");
+							if (incorrectChoice == 1) {
+								verifyRole("teacher");
+							} else if (incorrectChoice == 2) {
+								roleMenu();
+							}
+						}
+					}
+				}
+				
+			} else if (role == "instructor") {
+				sql = "SELECT instructorId, instructorPassword FROM instructor_list";
+				rs = statement.executeQuery(sql);
+				
+				while (rs.next()) {
+					while (incorrectChoice != 2) {
+						if (rs.getInt("instructorId") == idInput && rs.getString("instructorPassword").equals(passwordInput)) {
+							instructorMenu();
+						} else {
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)?");
+							if (incorrectChoice == 1) {
+								verifyRole("instructor");
+							} else if (incorrectChoice == 2) {
+								roleMenu();
+							}
+						}
+					}
+				}
+				
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	//-------------------------------Adding to array lists--------------------------------------------
@@ -200,7 +360,7 @@ public class CCAMain {
 		
 	}
 	
-	public static void viewStudent() {
+	public static void viewAllStudents() {
 		
 	}
 	
