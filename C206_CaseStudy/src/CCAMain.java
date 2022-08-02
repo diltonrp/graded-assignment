@@ -25,26 +25,40 @@ public class CCAMain {
 		boolean continueMenu = true;
 		
 		while (continueMenu) {
-			if (roleMenu() == 1) { // teacher
-				System.out.println("Welcome");
-				
-				if (teacherVerification()) {
-					viewStudents(teacherMenu());
-				} else {
-					System.out.println("You have entered the wrong id or password. What would you like to do?\n1. Return to home page\n2.Try entering id and password again");
-					int userChoice = Helper.readInt("Enter your option (1 or 2) > ");
-					if (userChoice == 1) {
-						roleMenu();
+			//while (teacherMenu() != 4) {
+				if (roleMenu() == 1) { // teacher
+					
+					System.out.println("Welcome");
+					
+					if (teacherVerification()) {
+						while (teacherMenu() != 4) {
+							viewStudents(teacherMenu());
+							
+							if (teacherMenu() == 4) {
+								roleMenu();
+							}
+						}
+						
+						
+					} else {
+						System.out.println("You have entered the wrong id or password. What would you like to do?\n1. Return to home page\n2.Try entering id and password again");
+						int wrongTeacherPasswordChoice = Helper.readInt("Enter your option (1 or 2) > ");
+						if (wrongTeacherPasswordChoice == 1) {
+							roleMenu();
+						}
 					}
+					//viewStudents(teacherMenu());
+					
+					
+				} else if (roleMenu() == 2) { // student
+					
+				} else if (roleMenu() == 3) { // parent
+					
+				} else {
+					System.out.println("Please input a valid number");
 				}
-				
-			} else if (roleMenu() == 2) { // student
-				
-			} else if (roleMenu() == 3) { // parent
-				
-			} else {
-				System.out.println("Please input a valid number");
-			}
+			//}
+			
 		}
 		
 	}
@@ -137,8 +151,9 @@ public class CCAMain {
 		System.out.println("1. View all students");
 		System.out.println("2. View students with CCA");
 		System.out.println("3. View students with no CCA");
+		System.out.println("4. Logout");
 		
-		int teacherSelection = Helper.readInt("Please select (1, 2, or 3) > ");
+		int teacherSelection = Helper.readInt("Please select (1, 2, 3 or 4) > ");
 		return teacherSelection;
 	}
 	
