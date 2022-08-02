@@ -174,7 +174,7 @@ public class CCAMain {
 	
 	
 	
-	//------------------------student 1--------------------------------
+	//------------------------student 1 (Dilton)--------------------------------
 	public static void addStudent() {
 		
 	}
@@ -187,7 +187,7 @@ public class CCAMain {
 		
 	}
 	//-------------------------end of student 1----------------------------
-	//-------------------------student 2-----------------------------------
+	//-------------------------student 2 (Lela)-----------------------------------
 	public static void addCCADetail() {
 		
 	}
@@ -200,7 +200,7 @@ public class CCAMain {
 		
 	}
 	//-------------------------end of student 2----------------------------
-	//-------------------------student 3-----------------------------------
+	//-------------------------student 3 (Robert)-----------------------------------
 	public static void addCCACategory() {
 		
 	}
@@ -213,7 +213,7 @@ public class CCAMain {
 		
 	}
 	//-------------------------end of student 3----------------------------
-	//-------------------------student 4-----------------------------------
+	//-------------------------student 4 (Yung Jian)-----------------------------------
 	public static void addParentAccount() { //remember to include student account
 		
 	}
@@ -226,7 +226,7 @@ public class CCAMain {
 		
 	}
 	//-------------------------end of student 4----------------------------
-	//-------------------------student 5-----------------------------------
+	//-------------------------student 5 (Ze Yu)-----------------------------------
 	public static void studentLogin() { // login with student and CCA registration ID
 		
 	}
