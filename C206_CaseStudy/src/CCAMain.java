@@ -30,43 +30,6 @@ public class CCAMain {
 		
 		roleMenu();
 
-		/*
-		if (roleMenu() == 1) { // teacher
-
-			if (teacherVerification()) {
-				
-				while (teacherMenu() != 4) {
-					System.out.println("Test working");
-					
-					System.out.println("Student printed");
-					viewStudents(teacherMenu());
-					
-					if (teacherMenu() == 4) {
-						roleMenu();
-						break;
-					}
-				}
-				
-				
-			} else {
-				System.out.println("You have entered the wrong id or password. What would you like to do?\n1. Return to home page\n2.Try entering id and password again");
-				int wrongTeacherPasswordChoice = Helper.readInt("Enter your option (1 or 2) > ");
-				if (wrongTeacherPasswordChoice == 1) {
-					roleMenu();
-				}
-			}
-			
-			
-			
-		} else if (roleMenu() == 2) { // student
-			System.out.println("Welcome student!");
-		} else if (roleMenu() == 3) { // parent
-			System.out.println("Welcome parent!");
-		} else {
-			System.out.println("Please input a valid number");
-		}
-		*/
-	
 	}
 	
 	private void dbConnection() {
@@ -144,6 +107,7 @@ public class CCAMain {
 				parentMenu();
 			} else if (roleSelection == 5) { // quit
 				System.out.println("Thank you for using our app!");
+				roleSelection = Helper.readInt("");
 			} else { // friendly error message
 				System.out.println("Please enter a valid input");
 				System.out.println("I am a...");
@@ -217,8 +181,9 @@ public class CCAMain {
 	}
 	
 	private static void instructorMenu() {
-		String[] menu = {"View students for their CCA", "Delete students", "View registered parents for your CCA", "Back to home"};
+		String[] menu = {"View students for your CCA", "Delete students", "View registered parents for your CCA", "Back to home"};
 		int i = 1;
+		String sql;
 		
 		for (String item : menu) {
 			System.out.println(i + ". " + item);
@@ -227,9 +192,22 @@ public class CCAMain {
 		
 		int instructorSelection = Helper.readInt("Please select your option > ");
 		
+		
 		switch (instructorSelection) {
 		case 1: // View students for their CCA
 			
+			try {
+				//sql = "SELECT sl.name FROM student_list sl INNER JOIN instructor_list il ON il.CCA = sl.selectedCCA";
+				sql = "SELECT name FROM student_list";
+				rs = statement.executeQuery(sql);
+				
+				while (rs.next()) {
+					System.out.println(rs.getString("name"));
+					
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 			break;
 			
 		case 2: // Delete students
