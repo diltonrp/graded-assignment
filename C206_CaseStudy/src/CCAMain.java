@@ -51,7 +51,7 @@ public class CCAMain {
 	private static boolean teacherVerification(){
 		boolean isATeacher = false;
 		
-		int inputTeacherId = Helper.readInt("Enter your ID > ");
+		int inputTeacherId = Helper.readInt("\nEnter your ID > ");
 		String inputTeacherPassword = Helper.readString("Enter your password > ");
 		
 		
@@ -88,7 +88,7 @@ public class CCAMain {
 	//-------------------------------------Start of menu-----------------------------------------------
 	
 	private static void roleMenu() {
-		System.out.println("I am a...");
+		System.out.println("\nI am a...");
 		System.out.println("1. Teacher");
 		System.out.println("2. CCA Instructor");
 		System.out.println("3. Student");
@@ -144,31 +144,39 @@ public class CCAMain {
 			break;
 			
 		case 3: // Add student
-			
+			addStudent();
 			break;
 			
 		case 4: // Delete student 
+			deleteStudent();
 			break;
 			
 		case 5: // View all CCA categories
+			viewAllCCACategory();
 			break;
 			
 		case 6: // Add CCA category
+			addCCACategory();
 			break;
 			
 		case 7: // Delete CCA category
+			deleteCCACategory();
 			break;
 			
 		case 8: // View registered parents
+			viewRegisteredParents();
 			break;
 			
 		case 9: // Add parents
+			addParentAccount();
 			break;
 			
 		case 10: // Delete parents
+			deleteParent();
 			break;
 			
 		case 11: // Add students for CCA
+			addStudentForCCA();
 			break;
 			
 		case 12: // Back to home
@@ -211,9 +219,11 @@ public class CCAMain {
 			break;
 			
 		case 2: // Delete students
+			deleteStudent();
 			break;
 				
 		case 3: // View registered parents for your CCA
+			viewRegisteredParents();
 			break;
 			
 		case 4: // Back to home
@@ -235,7 +245,7 @@ public class CCAMain {
 	
 	//-------------------------------------------Verification-------------------------------------
 	private static void verifyRole(String role) {
-		int idInput = Helper.readInt("Enter your id > ");
+		int idInput = Helper.readInt("\nEnter your id > ");
 		String passwordInput = Helper.readString("Enter your password > ");
 		int incorrectChoice = -1;
 		
@@ -272,7 +282,7 @@ public class CCAMain {
 						if (rs.getInt("instructorId") == idInput && rs.getString("instructorPassword").equals(passwordInput)) {
 							instructorMenu();
 						} else {
-							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)?");
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)? > ");
 							if (incorrectChoice == 1) {
 								verifyRole("instructor");
 							} else if (incorrectChoice == 2) {
@@ -368,7 +378,7 @@ public class CCAMain {
 		
 	}
 	
-	public static void deleteAllCCACategory() {
+	public static void deleteCCACategory() {
 		
 	}
 	//-------------------------end of student 3----------------------------
