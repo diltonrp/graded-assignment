@@ -1,15 +1,3 @@
-/**
- * I declare that this code was written by me.
- * I will not copy or allow others to copy my code.
- * I understand that copying code is considered as plagiarism.
- *
- * 20034695, Aug 3, 2022 9:28:36 AM
- */
-
-/**
- * @author 20034695
- *
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
