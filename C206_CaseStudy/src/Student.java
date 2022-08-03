@@ -1,104 +1,58 @@
-/**
- * I declare that this code was written by me.
- * I will not copy or allow others to copy my code.
- * I understand that copying code is considered as plagiarism.
- *
- * 20034695, Jul 25, 2022 4:56:31 PM
- */
 
-/**
- * @author 20034695
- *
- */
 public class Student {
-	public int sId;
-	public String sIc;
-	public String sName;
-	public String sEmail;
-	public int sContactNumber;
-	public String moduleSelected;
-	public String sClass;
-	public String sCCA;
+	private int studentId;
+	private String studentName;
+	private String studentClass;
+	private String classroomTeacher;
+	private String selectedCCA;
 	
-	public Student(int sId, String sIc, String sName, String sEmail, int sContactNumber, String moduleSelected,
-			String sClass, String sCCA) {
-		super();
-		this.sId = sId;
-		this.sIc = sIc;
-		this.sName = sName;
-		this.sEmail = sEmail;
-		this.sContactNumber = sContactNumber;
-		this.moduleSelected = moduleSelected;
-		this.sClass = sClass;
-		this.sCCA = sCCA;
+	public Student(int studentId, String studentName, String studentClass, String classroomTeacher, String selectedCCA) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentClass = studentClass;
+		this.classroomTeacher = classroomTeacher;
+		this.selectedCCA = selectedCCA;
 	}
 
-	public int getsId() {
-		return sId;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setsId(int sId) {
-		this.sId = sId;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 
-	public String getsIc() {
-		return sIc;
+	public String getStudentName() {
+		return studentName;
 	}
 
-	public void setsIc(String sIc) {
-		this.sIc = sIc;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
-	public String getsName() {
-		return sName;
+	public String getStudentClass() {
+		return studentClass;
 	}
 
-	public void setsName(String sName) {
-		this.sName = sName;
+	public void setStudentClass(String studentClass) {
+		this.studentClass = studentClass;
 	}
 
-	public String getsEmail() {
-		return sEmail;
+	public String getClassroomTeacher() {
+		return classroomTeacher;
 	}
 
-	public void setsEmail(String sEmail) {
-		this.sEmail = sEmail;
+	public void setClassroomTeacher(String classroomTeacher) {
+		this.classroomTeacher = classroomTeacher;
 	}
 
-	public int getsContactNumber() {
-		return sContactNumber;
+	public String getSelectedCCA() {
+		return selectedCCA;
 	}
 
-	public void setsContactNumber(int sContactNumber) {
-		this.sContactNumber = sContactNumber;
+	public void setSelectedCCA(String selectedCCA) {
+		this.selectedCCA = selectedCCA;
 	}
-
-	public String getModuleSelected() {
-		return moduleSelected;
-	}
-
-	public void setModuleSelected(String moduleSelected) {
-		this.moduleSelected = moduleSelected;
-	}
-
-	public String getsClass() {
-		return sClass;
-	}
-
-	public void setsClass(String sClass) {
-		this.sClass = sClass;
-	}
-	
-	public String getsCCA() {
-		return sCCA;
-	}
-	
-	public void setsCCA(String sCCA) {
-		this.sCCA = sCCA;
-	}
-	
-	
-	
 	
 	
 }
