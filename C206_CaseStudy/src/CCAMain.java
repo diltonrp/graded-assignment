@@ -16,7 +16,7 @@ public class CCAMain {
 	static Statement statement;
 	static ResultSet rs;
 	
-	public static String nameOfTeacher = "";
+//	public static String nameOfTeacher = "";
 	
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
 	//private static ArrayList<parent> parentList = new ArrayList<parent>();
@@ -205,7 +205,7 @@ public class CCAMain {
 	}
 	
 	private static void studentMenu() {
-		String[] menu = {"View all CCAs", "View all CCA catgories", "Login", "Add myself for CCA"};
+		String[] menu = {"View all CCAs", "View all CCA catgories", "Login", "Add myself for CCA", "Back to home"};
 		int i = 1;
 		String sql;
 		
@@ -233,13 +233,17 @@ public class CCAMain {
 			addStudentForCCA("student");
 			break;
 			
+		case 5: // Back to home
+			roleMenu();
+			break;
+			
 		default:
 			break;
 		}
 	}
 	
 	private static void parentMenu() {
-		String[] menu = {"View all CCAs", "View all CCA categories", "Sign Up", "Login", "Add my child for CCA"};
+		String[] menu = {"View all CCAs", "View all CCA categories", "Sign Up", "Login", "Add my child for CCA", "Back to home"};
 		int i = 1;
 		String sql;
 		
@@ -268,6 +272,10 @@ public class CCAMain {
 			
 		case 5: // Add my child for CCA
 			addStudentForCCA("parent");
+			break;
+			
+		case 6: // Back to home
+			roleMenu();
 			break;
 			
 		default:
