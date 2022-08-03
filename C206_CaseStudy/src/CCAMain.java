@@ -3,19 +3,20 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import c209_L08.DBUtil;
-import c209_L08.Helper;
+import javax.swing.SwingConstants;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CCAMain {
 
+	//------------------------student 1 (Dilton)--------------------------------
+	
 	static Connection conn;
 	static Statement statement;
 	static ResultSet rs;
 	
-	public static String nameOfTeacher = "";
+//	public static String nameOfTeacher = "";
 	
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
 	//private static ArrayList<parent> parentList = new ArrayList<parent>();
@@ -53,43 +54,6 @@ public class CCAMain {
 		
 	}
 	
-	private static boolean teacherVerification(){
-		boolean isATeacher = false;
-		
-		int inputTeacherId = Helper.readInt("\nEnter your ID > ");
-		String inputTeacherPassword = Helper.readString("Enter your password > ");
-		
-		
-		int teacherId = 0;;
-		String teacherPassword = "";
-		
-		try {
-			String sql = "SELECT id, name, password FROM teacher_list";
-			
-			rs = statement.executeQuery(sql);
-			
-			while (rs.next()) {
-				teacherId = rs.getInt("id");
-				String teacherName = rs.getString("name");
-				teacherPassword = rs.getString("password");
-				
-				if (teacherId == inputTeacherId && teacherPassword.equals(inputTeacherPassword)) {
-					isATeacher = true;
-					nameOfTeacher = teacherName;
-					break;
-				} else {
-					isATeacher = false;
-				}
-				
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
-		
-		
-		return isATeacher;
-	}
-	
 	//-------------------------------------Start of menu-----------------------------------------------
 	
 	private static void roleMenu() {
@@ -125,6 +89,7 @@ public class CCAMain {
 			}
 		}
 		
+		
 	}
 	
 	private static void teacherMenu() {
@@ -149,6 +114,7 @@ public class CCAMain {
 			break;
 			
 		case 3: // Add student
+			System.out.println("Yea it is working");
 			addStudent();
 			break;
 			
@@ -181,7 +147,7 @@ public class CCAMain {
 			break;
 			
 		case 11: // Add students for CCA
-			addStudentForCCA();
+			addStudentForCCA("teacher");
 			break;
 			
 		case 12: // Back to home
@@ -189,6 +155,7 @@ public class CCAMain {
 			break;
 			
 		default:
+			roleMenu();
 			break;
 		}
 	}
@@ -241,11 +208,82 @@ public class CCAMain {
 	}
 	
 	private static void studentMenu() {
+		String[] menu = {"View all CCAs", "View all CCA catgories", "Login", "Add myself for CCA", "Back to home"};
+		int i = 1;
+		String sql;
 		
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
+		
+		int studentSelection = Helper.readInt("Please select your option in numbers > ");
+		
+		switch (studentSelection) {
+		case 1: // View CCA Details
+			viewAllCCA();
+			break;
+			
+		case 2: // View All CCA Categories
+			viewAllCCACategory();
+			break;
+			
+		case 3: // Login
+			studentLogin();
+			break;
+			
+		case 4: // Add CCA for myself
+			addStudentForCCA("student");
+			break;
+			
+		case 5: // Back to home
+			roleMenu();
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	private static void parentMenu() {
+		String[] menu = {"View all CCAs", "View all CCA categories", "Sign Up", "Login", "Add my child for CCA", "Back to home"};
+		int i = 1;
+		String sql;
 		
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
+		
+		int parentSelection = Helper.readInt("Please select your option in numbers > ");
+		
+		switch (parentSelection) {
+		case 1: // View all CCAs
+			viewAllCCA();
+			break;
+			
+		case 2: // View all CCA categories
+			viewAllCCACategory();
+			break;
+			
+		case 3: // Parent sign up
+			addParentAccount();
+			break;
+			
+		case 4: // Parent login
+			parentLogin();
+			
+		case 5: // Add my child for CCA
+			addStudentForCCA("parent");
+			break;
+			
+		case 6: // Back to home
+			roleMenu();
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	//-------------------------------------------Verification-------------------------------------
@@ -268,7 +306,7 @@ public class CCAMain {
 						if (rs.getInt("id") == idInput && rs.getString("password").equals(passwordInput)) {
 							teacherMenu();
 						} else {
-							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)?");
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)? > ");
 							if (incorrectChoice == 1) {
 								verifyRole("teacher");
 							} else if (incorrectChoice == 2) {
@@ -385,9 +423,28 @@ public class CCAMain {
 	
 	
 	
-	//------------------------student 1 (Dilton)--------------------------------
+
 	public static void addStudent() {
 		
+		int studentId = 0;
+		while (!String.valueOf(studentId).matches("[0-9]+") && !(studentId > 0)) {
+			studentId = Helper.readInt("Enter your student ID > ");
+		}
+		
+		/*
+		try {
+			
+			String sql = "INSERT INTO student_list (studentId, name, grade, class, classroomTeacher, selectedCCA, studentPassword, studentRegistration, parentId) VALUES ";
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) {
+				System.out.println(rs.getString("name"));
+				
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		*/
 	}
 	
 	public static void viewAllStudents() {
@@ -444,6 +501,14 @@ public class CCAMain {
 		int childStudentId = Helper.readInt("Enter your children studen id > ");
 		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
 		
+<<<<<<< HEAD
+		for (int p = 0; p<){
+		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
+				+ " childStudentId, studentRegistrationId) " 
+					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
+				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
+		int rowsAffected = DBUtil.execSQL(sql);
+=======
 //		while (rs.next()) {
 //			int newParentId = rs.getInt("parentId");
 //			String newName = rs.getString("name");
@@ -469,6 +534,7 @@ public class CCAMain {
 //				}else {
 //					System.out.println("Must enter include @ and .com");
 //				}
+>>>>>>> branch 'master' of https://github.com/diltonrp/graded-assignment.git
 
 			DBUtil.close();
 			}
@@ -541,7 +607,11 @@ try {
 		
 	}
 	
-	public static void addStudentForCCA() {
+	public static void parentLogin() {
+		
+	}
+	
+	public static void addStudentForCCA(String studentOrParent) {
 		
 	}
 	
