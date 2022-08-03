@@ -102,9 +102,9 @@ public class CCAMain {
 			} else if (roleSelection == 2) { // cca instructor
 				verifyRole("instructor");
 			} else if (roleSelection == 3) { // student
-				studentMenu();
+				verifyRole("student");
 			} else if (roleSelection == 4) { // parent
-				parentMenu();
+				verifyRole("parent");
 			} else if (roleSelection == 5) { // quit
 				System.out.println("Thank you for using our app!");
 				roleSelection = Helper.readInt("");
@@ -292,6 +292,43 @@ public class CCAMain {
 					}
 				}
 				
+			} else if (role == "student") {
+				sql = "SELECT studentId, studentPassword FROM student_list";
+				rs = statement.executeQuery(sql);
+				
+				while (rs.next()) {
+					while (incorrectChoice != 2) {
+						if (rs.getInt("studentId") == idInput && rs.getString("studentPassword").equals(passwordInput)){
+							studentMenu();
+						} else {
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)? > ");
+							if (incorrectChoice == 1) {
+								verifyRole("student");
+							} else if (incorrectChoice == 2) {
+								roleMenu();
+							}
+						}
+					}
+				}
+				
+			} else if (role == "parent") {
+				sql = "SELECT parentId, parentPassword FROM parent_list";
+				rs = statement.executeQuery(sql);
+				
+				while (rs.next()) {
+					while (incorrectChoice != 2) {
+						if (rs.getInt("parentId") == idInput && rs.getString("parentPassword").equals(passwordInput)){
+							parentMenu();
+						} else {
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)? > ");
+							if (incorrectChoice == 1) {
+								verifyRole("parent");
+							} else if (incorrectChoice == 2) {
+								roleMenu();
+							}
+						}
+					}
+				}
 			}
 			
 			
