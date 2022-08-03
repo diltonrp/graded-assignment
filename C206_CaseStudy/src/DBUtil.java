@@ -9,7 +9,7 @@ import java.sql.Statement;
  * I will not copy or allow others to copy my code.
  * I understand that copying code is considered as plagiarism.
  *
- * 20034695, Aug 4, 2022 12:08:15 AM
+ * 20034695, Aug 4, 2022 12:19:31 AM
  */
 
 /**
@@ -42,7 +42,7 @@ public class DBUtil {
 		} 
 	}
 
-		public static ResultSet getTable(String sqlStr) {// SELECT
+		public static ResultSet getTable(String sqlStr) {
 		try {
 			connect();
 
@@ -56,7 +56,7 @@ public class DBUtil {
 		return resultSet;
 	}
 
-	public static int execSQL(String sqlStr) { //INSERT, UPDATE, DELETE
+	public static int execSQL(String sqlStr) {
 		int affectedRows = 0;
 		try {
 			connect();
@@ -89,5 +89,4 @@ public class DBUtil {
 
 		}
 	}
-}
 }
