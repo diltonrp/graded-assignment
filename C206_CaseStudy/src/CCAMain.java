@@ -473,7 +473,7 @@ public class CCAMain {
 			DBUtil.close();
 			}
 		}
-	}
+	
 	
 	public static void viewRegisteredParents() {
 try {
