@@ -263,7 +263,7 @@ public class CCAMain {
 						if (rs.getInt("id") == idInput && rs.getString("password").equals(passwordInput)) {
 							teacherMenu();
 						} else {
-							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)?");
+							incorrectChoice = Helper.readInt("Either your ID or password is incorrect.\nWould you like to try again (1) or go back to main menu (2)? > ");
 							if (incorrectChoice == 1) {
 								verifyRole("teacher");
 							} else if (incorrectChoice == 2) {
