@@ -482,125 +482,126 @@ public class CCAMain {
 	}
 	//-------------------------end of student 3----------------------------
 	//-------------------------student 4 (Yung Jian)-----------------------------------
-	public static void addParentAccount() { //remember to include student account
-
-
-		String jdbcURL = "jdbc:mysql://localhost:3306/c206";
-		String dbUsername = "root";
-		String dbPassword = "";
-
-		DBUtil.init(jdbcURL, dbUsername, dbPassword);
-
-		System.out.println("ADDING PARENT ACCOUNT");
-		Helper.line(40, "-");
-		int parentId = Helper.readInt("Enter parent id > ");
-		String name = Helper.readString("Enter name > ");
-		String email = Helper.readString("Enter parent email > ");
-		double contactNumber = Helper.readDouble("Enter contactNumber > ");
-		String parentPassword = Helper.readString("Enter parent password > ");
-		int childStudentId = Helper.readInt("Enter your children studen id > ");
-		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
-		
-<<<<<<< HEAD
-		for (int p = 0; p<){
-		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
-				+ " childStudentId, studentRegistrationId) " 
-					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
-				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
-		int rowsAffected = DBUtil.execSQL(sql);
-=======
-//		while (rs.next()) {
-//			int newParentId = rs.getInt("parentId");
-//			String newName = rs.getString("name");
-//			String newEmail = rs.getString("email");
-//			String newContact = rs.getString("contact");
-//			String newParentPassword = rs.getString("parentPassword");
-//			int newChildStudentId = rs.getInt("childStudentId");
-//			int newStudentRegistratitonId = rs.getInt("studentRegistrationId");
+//	public static void addParentAccount() { //remember to include student account
+//
+//
+//		String jdbcURL = "jdbc:mysql://localhost:3306/c206";
+//		String dbUsername = "root";
+//		String dbPassword = "";
+//
+//		DBUtil.init(jdbcURL, dbUsername, dbPassword);
+//
+//		System.out.println("ADDING PARENT ACCOUNT");
+//		Helper.line(40, "-");
+//		int parentId = Helper.readInt("Enter parent id > ");
+//		String name = Helper.readString("Enter name > ");
+//		String email = Helper.readString("Enter parent email > ");
+//		double contactNumber = Helper.readDouble("Enter contactNumber > ");
+//		String parentPassword = Helper.readString("Enter parent password > ");
+//		int childStudentId = Helper.readInt("Enter your children studen id > ");
+//		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
+//		
+//
+//		for (int p = 0; p<){
+//		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
+//				+ " childStudentId, studentRegistrationId) " 
+//					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
+//				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
+//		int rowsAffected = DBUtil.execSQL(sql);
+//
+////		while (rs.next()) {
+////			int newParentId = rs.getInt("parentId");
+////			String newName = rs.getString("name");
+////			String newEmail = rs.getString("email");
+////			String newContact = rs.getString("contact");
+////			String newParentPassword = rs.getString("parentPassword");
+////			int newChildStudentId = rs.getInt("childStudentId");
+////			int newStudentRegistratitonId = rs.getInt("studentRegistrationId");
+////			
+////			if(parentId == newParentId) {
+//				if(email.contains("@")&(email.contains(".com"))) {
+//					String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
+//							+ " childStudentId, studentRegistrationId) " 
+//							+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
+//							contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
+//					int rowsAffected = DBUtil.execSQL(sql);
+//					
+//					if (rowsAffected == 1) {
+//						System.out.println("Parent added!");
+//					} else {
+//						System.out.println("Insert failed!");
+//					}
+////				}else {
+////					System.out.println("Must enter include @ and .com");
+////				}
+//
+//
+//			DBUtil.close();
+//			}
+//		}
+//		}
+//	
+//	
+//	public static void viewRegisteredParents() {
+//try {
 //			
-//			if(parentId == newParentId) {
-				if(email.contains("@")&(email.contains(".com"))) {
-					String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
-							+ " childStudentId, studentRegistrationId) " 
-							+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
-							contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
-					int rowsAffected = DBUtil.execSQL(sql);
-					
-					if (rowsAffected == 1) {
-						System.out.println("Parent added!");
-					} else {
-						System.out.println("Insert failed!");
-					}
-//				}else {
-//					System.out.println("Must enter include @ and .com");
-//				}
->>>>>>> branch 'master' of https://github.com/diltonrp/graded-assignment.git
-
-			DBUtil.close();
-			}
-		}
-	
-	
-	public static void viewRegisteredParents() {
-try {
-			
-			String jdbcURL = "jdbc:mysql://localhost:3306/c206";
-			String dbUsername = "root";
-			String dbPassword = "";
-
-			DBUtil.init(jdbcURL, dbUsername, dbPassword);
-
-			String output = String.format("%-5s %-20s %-10s %-10s %-10s %-10s %-10s \n", "PARENT ID", "NAME", "EMAIL", "CONTACT NUMBER", "PATENT PASSWORD" , "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
-
-			String sql = "SELECT *FROM parent_list";
-			ResultSet rs = DBUtil.getTable(sql);
-
-			while (rs.next()) {
-				
-				//int parentId = Helper.readInt("Enter parent id > ");
-				
-				int newParentId = rs.getInt("parentId");
-				String newName = rs.getString("name");
-				String newEmail = rs.getString("email");
-				String newContact = rs.getString("contact");
-				String newParentPassword = rs.getString("parentPassword");
-				int newChildStudentId = rs.getInt("childStudentId");
-				int newStudentRegistrationId = rs.getInt("studentRegistrationId");
-				//if(parentId == newParentId) {
-				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", newParentId, newName, newEmail, newContact, newParentPassword , newChildStudentId, newStudentRegistrationId);
-				//}
-				
-			}
-			System.out.println(output);
-
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
-	}
-	
-	public static void deleteParent() {
-		String jdbcURL = "jdbc:mysql://localhost/c206";
-		String dbUsername = "root";
-		String dbPassword = "";
-
-		DBUtil.init(jdbcURL, dbUsername, dbPassword);
-
-		System.out.println("DELETING PARENT");
-		Helper.line(40, "-");
-
-		int parentId = Helper.readInt("Enter parent id > ");
-
-		String deleteSQL = "DELETE FROM student WHERE parentId='" + parentId + "'";
-		int rowsAffected = DBUtil.execSQL(deleteSQL);
-
-		if (rowsAffected == 1) {
-			System.out.println("Parent deleted!");
-		} else {
-			System.out.println("Delete failed!");
-		}
-
-		DBUtil.close();
-	}
+//			String jdbcURL = "jdbc:mysql://localhost:3306/c206";
+//			String dbUsername = "root";
+//			String dbPassword = "";
+//
+//			DBUtil.init(jdbcURL, dbUsername, dbPassword);
+//
+//			String output = String.format("%-5s %-20s %-10s %-10s %-10s %-10s %-10s \n", "PARENT ID", "NAME", "EMAIL", "CONTACT NUMBER", "PATENT PASSWORD" , "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
+//
+//			String sql = "SELECT *FROM parent_list";
+//			ResultSet rs = DBUtil.getTable(sql);
+//
+//			while (rs.next()) {
+//				
+//				//int parentId = Helper.readInt("Enter parent id > ");
+//				
+//				int newParentId = rs.getInt("parentId");
+//				String newName = rs.getString("name");
+//				String newEmail = rs.getString("email");
+//				String newContact = rs.getString("contact");
+//				String newParentPassword = rs.getString("parentPassword");
+//				int newChildStudentId = rs.getInt("childStudentId");
+//				int newStudentRegistrationId = rs.getInt("studentRegistrationId");
+//				//if(parentId == newParentId) {
+//				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", newParentId, newName, newEmail, newContact, newParentPassword , newChildStudentId, newStudentRegistrationId);
+//				//}
+//				
+//			}
+//			System.out.println(output);
+//
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//		}
+//	}
+//	
+//	public static void deleteParent() {
+//		String jdbcURL = "jdbc:mysql://localhost/c206";
+//		String dbUsername = "root";
+//		String dbPassword = "";
+//
+//		DBUtil.init(jdbcURL, dbUsername, dbPassword);
+//
+//		System.out.println("DELETING PARENT");
+//		Helper.line(40, "-");
+//
+//		int parentId = Helper.readInt("Enter parent id > ");
+//
+//		String deleteSQL = "DELETE FROM student WHERE parentId='" + parentId + "'";
+//		int rowsAffected = DBUtil.execSQL(deleteSQL);
+//
+//		if (rowsAffected == 1) {
+//			System.out.println("Parent deleted!");
+//		} else {
+//			System.out.println("Delete failed!");
+//		}
+//
+//		DBUtil.close();
+//	}
 	//-------------------------end of student 4----------------------------
 	//-------------------------student 5 (Ze Yu)-----------------------------------
 	public static void studentLogin() { // login with student and CCA registration ID
