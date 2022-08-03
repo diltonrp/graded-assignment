@@ -18,6 +18,7 @@ public class CCAMain {
 	public static String nameOfTeacher = "";
 	
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
+	//private static ArrayList<parent> parentList = new ArrayList<parent>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -443,21 +444,35 @@ public class CCAMain {
 		int childStudentId = Helper.readInt("Enter your children studen id > ");
 		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
 		
-		for (int p = 0; p<)
-		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
-				+ " childStudentId, studentRegistrationId) " 
-					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
-				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
-		int rowsAffected = DBUtil.execSQL(sql);
+//		while (rs.next()) {
+//			int newParentId = rs.getInt("parentId");
+//			String newName = rs.getString("name");
+//			String newEmail = rs.getString("email");
+//			String newContact = rs.getString("contact");
+//			String newParentPassword = rs.getString("parentPassword");
+//			int newChildStudentId = rs.getInt("childStudentId");
+//			int newStudentRegistratitonId = rs.getInt("studentRegistrationId");
+//			
+//			if(parentId == newParentId) {
+				if(email.contains("@")&(email.contains(".com"))) {
+					String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
+							+ " childStudentId, studentRegistrationId) " 
+							+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
+							contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
+					int rowsAffected = DBUtil.execSQL(sql);
+					
+					if (rowsAffected == 1) {
+						System.out.println("Parent added!");
+					} else {
+						System.out.println("Insert failed!");
+					}
+//				}else {
+//					System.out.println("Must enter include @ and .com");
+//				}
 
-		if (rowsAffected == 1) {
-			System.out.println("Student added!");
-		} else {
-			System.out.println("Insert failed!");
+			DBUtil.close();
+			}
 		}
-
-		DBUtil.close();
-	
 	}
 	
 	public static void viewRegisteredParents() {
@@ -475,16 +490,20 @@ try {
 			ResultSet rs = DBUtil.getTable(sql);
 
 			while (rs.next()) {
-
-				int parentId = Helper.readInt("Enter parent id > ");
-				String name = Helper.readString("Enter name > ");
-				String email = Helper.readString("Enter parent email > ");
-				double contactNumber = Helper.readDouble("Enter contactNumber > ");
-				String parentPassword = Helper.readString("Enter parent password > ");
-				int childStudentId = Helper.readInt("Enter your children studen id > ");
-				int studentRegistrationId = Helper.readInt("Enter student registration id > ");
-
-				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", parentId, name, email, contactNumber, parentPassword , childStudentId, studentRegistrationId);
+				
+				//int parentId = Helper.readInt("Enter parent id > ");
+				
+				int newParentId = rs.getInt("parentId");
+				String newName = rs.getString("name");
+				String newEmail = rs.getString("email");
+				String newContact = rs.getString("contact");
+				String newParentPassword = rs.getString("parentPassword");
+				int newChildStudentId = rs.getInt("childStudentId");
+				int newStudentRegistrationId = rs.getInt("studentRegistrationId");
+				//if(parentId == newParentId) {
+				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", newParentId, newName, newEmail, newContact, newParentPassword , newChildStudentId, newStudentRegistrationId);
+				//}
+				
 			}
 			System.out.println(output);
 
@@ -509,7 +528,7 @@ try {
 		int rowsAffected = DBUtil.execSQL(deleteSQL);
 
 		if (rowsAffected == 1) {
-			System.out.println("Student deleted!");
+			System.out.println("Parent deleted!");
 		} else {
 			System.out.println("Delete failed!");
 		}
