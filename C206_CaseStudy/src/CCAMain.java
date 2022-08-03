@@ -3,14 +3,15 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import c209_L08.DBUtil;
-import c209_L08.Helper;
+import javax.swing.SwingConstants;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CCAMain {
 
+	//------------------------student 1 (Dilton)--------------------------------
+	
 	static Connection conn;
 	static Statement statement;
 	static ResultSet rs;
@@ -50,43 +51,6 @@ public class CCAMain {
 			se.printStackTrace();
 		}
 		
-	}
-	
-	private static boolean teacherVerification(){
-		boolean isATeacher = false;
-		
-		int inputTeacherId = Helper.readInt("\nEnter your ID > ");
-		String inputTeacherPassword = Helper.readString("Enter your password > ");
-		
-		
-		int teacherId = 0;;
-		String teacherPassword = "";
-		
-		try {
-			String sql = "SELECT id, name, password FROM teacher_list";
-			
-			rs = statement.executeQuery(sql);
-			
-			while (rs.next()) {
-				teacherId = rs.getInt("id");
-				String teacherName = rs.getString("name");
-				teacherPassword = rs.getString("password");
-				
-				if (teacherId == inputTeacherId && teacherPassword.equals(inputTeacherPassword)) {
-					isATeacher = true;
-					nameOfTeacher = teacherName;
-					break;
-				} else {
-					isATeacher = false;
-				}
-				
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
-		
-		
-		return isATeacher;
 	}
 	
 	//-------------------------------------Start of menu-----------------------------------------------
@@ -240,11 +204,74 @@ public class CCAMain {
 	}
 	
 	private static void studentMenu() {
+		String[] menu = {"View all CCAs", "View all CCA catgories", "Login", "Add myself for CCA"};
+		int i = 1;
+		String sql;
 		
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
+		
+		int studentSelection = Helper.readInt("Please select your option in numbers > ");
+		
+		switch (studentSelection) {
+		case 1: // View CCA Details
+			viewAllCCA();
+			break;
+			
+		case 2: // View All CCA Categories
+			viewAllCCACategory();
+			break;
+			
+		case 3: // Login
+			studentLogin();
+			break;
+			
+		case 4: // Add CCA for myself
+			addStudentForCCA("student");
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	private static void parentMenu() {
+		String[] menu = {"View all CCAs", "View all CCA categories", "Sign Up", "Login", "Add my child for CCA"};
+		int i = 1;
+		String sql;
 		
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
+		}
+		
+		int parentSelection = Helper.readInt("Please select your option in numbers > ");
+		
+		switch (parentSelection) {
+		case 1: // View all CCAs
+			viewAllCCA();
+			break;
+			
+		case 2: // View all CCA categories
+			viewAllCCACategory();
+			break;
+			
+		case 3: // Parent sign up
+			addParentAccount();
+			break;
+			
+		case 4: // Parent login
+			parentLogin();
+			
+		case 5: // Add my child for CCA
+			addStudentForCCA("parent");
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	//-------------------------------------------Verification-------------------------------------
@@ -384,7 +411,7 @@ public class CCAMain {
 	
 	
 	
-	//------------------------student 1 (Dilton)--------------------------------
+
 	public static void addStudent() {
 		
 	}
@@ -443,7 +470,7 @@ public class CCAMain {
 		int childStudentId = Helper.readInt("Enter your children studen id > ");
 		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
 		
-		for (int p = 0; p<)
+		for (int p = 0; p<){
 		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
 				+ " childStudentId, studentRegistrationId) " 
 					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
@@ -522,7 +549,11 @@ try {
 		
 	}
 	
-	public static void addStudentForCCA() {
+	public static void parentLogin() {
+		
+	}
+	
+	public static void addStudentForCCA(String studentOrParent) {
 		
 	}
 	
