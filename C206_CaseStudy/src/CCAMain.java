@@ -89,6 +89,7 @@ public class CCAMain {
 			}
 		}
 		
+		
 	}
 	
 	private static void teacherMenu() {
@@ -113,6 +114,7 @@ public class CCAMain {
 			break;
 			
 		case 3: // Add student
+			System.out.println("Yea it is working");
 			addStudent();
 			break;
 			
@@ -153,6 +155,7 @@ public class CCAMain {
 			break;
 			
 		default:
+			roleMenu();
 			break;
 		}
 	}
@@ -423,6 +426,25 @@ public class CCAMain {
 
 	public static void addStudent() {
 		
+		int studentId = 0;
+		while (!String.valueOf(studentId).matches("[0-9]+") && !(studentId > 0)) {
+			studentId = Helper.readInt("Enter your student ID > ");
+		}
+		
+		/*
+		try {
+			
+			String sql = "INSERT INTO student_list (studentId, name, grade, class, classroomTeacher, selectedCCA, studentPassword, studentRegistration, parentId) VALUES ";
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) {
+				System.out.println(rs.getString("name"));
+				
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		*/
 	}
 	
 	public static void viewAllStudents() {
