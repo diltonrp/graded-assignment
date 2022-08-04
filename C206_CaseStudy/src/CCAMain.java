@@ -160,11 +160,11 @@ public class CCAMain {
 		
 		switch (instructorSelection) {
 		case 1: // View students for their CCA
-			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT REGISTRATION ID", "PARENT ID");
+			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s\n", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT REGISTRATION ID", "PARENT ID");
 			
 			for (Student student : globalVariables.studentList) {
 				if (student.getSelectedCCA().equalsIgnoreCase(globalVariables.instructorCCA)) {
-					globalVariables.output += String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentRegistrationID(), student.getParentID());
+					globalVariables.output += String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s\n", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentRegistrationID(), student.getParentID());
 				}
 			}
 			
@@ -306,12 +306,10 @@ public class CCAMain {
 		}
 		
 		public static void viewAllStudents() {
-			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-20s %-25s %-10s", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT PASSWORD", "STUDENT REGISTRATION ID", "PARENT ID");
+			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s\n", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT REGISTRATION ID", "PARENT ID");
 			
 			for (Student student : globalVariables.studentList) {
-				if (student.getSelectedCCA().equalsIgnoreCase(globalVariables.instructorCCA)) {
-					globalVariables.output += String.format("%-10d %-10s %-10s %-15s %-20s %-20s %-20s %-25d %-10d", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentPassword(), student.getStudentRegistrationID(), student.getParentID());
-				}
+				globalVariables.output += String.format("%-10d %-10s %-10s %-15s %-20s %-20s %-25d %-10d\n", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentRegistrationID(), student.getParentID());
 			}
 			
 			System.out.println(globalVariables.output);
@@ -372,12 +370,12 @@ public class CCAMain {
 		
 		public static void viewAllCCA() {
 			
-			globalVariables.output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s", "CCA ID", "CCA TITLE", "CCA CATEGORY", "CLASS SIZE", "DAY OF WEEK", "TIME", "VENUE", "NAME OF INSTRUCTOR");
+			globalVariables.output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "CCA ID", "CCA TITLE", "CCA CATEGORY", "CLASS SIZE", "DAY OF WEEK", "TIME", "VENUE", "NAME OF INSTRUCTOR");
 			
 			for (cca cca : globalVariables.ccaList) {
 				if (cca instanceof ccaIndividual) {
 					ccaIndividual ccaName = (ccaIndividual)cca;
-					globalVariables.output += String.format("%-10d %-10s %-10s %-10d %-10s %-10s %-10s %-10s %-10s",ccaName.getCcaID(), ccaName.getCcaTitle(), ccaName.getCcaCat(), ccaName.getClassSize(), ccaName.getDayOfWeek(), ccaName.getTime(), ccaName.getVenue(), ccaName.getNameOfInstructor());
+					globalVariables.output += String.format("%-10d %-10s %-10s %-10d %-10s %-10s %-10s %-10s %-10s\n",ccaName.getCcaID(), ccaName.getCcaTitle(), ccaName.getCcaCat(), ccaName.getClassSize(), ccaName.getDayOfWeek(), ccaName.getTime(), ccaName.getVenue(), ccaName.getNameOfInstructor());
 				}
 			}
 			
@@ -416,12 +414,12 @@ public class CCAMain {
 		}
 		
 		public static void viewAllCCACategory() {
-			globalVariables.output += String.format("%-5s %-10s", "ID", "CATEGORY");
+			globalVariables.output += String.format("%-5s %-10s\n", "ID", "CATEGORY");
 					
 			for (cca cca : globalVariables.ccaList) {
 				if (cca instanceof ccaCategory) {
 					ccaCategory ccaCat = (ccaCategory)cca;
-					globalVariables.output += String.format("%-5d %-10s", ccaCat.getId(), ccaCat.getCcaCategory());
+					globalVariables.output += String.format("%-5d %-10s\n", ccaCat.getId(), ccaCat.getCcaCategory());
 				}
 			}
 			
@@ -464,10 +462,10 @@ public class CCAMain {
 		
 		public static void viewRegisteredParents() {
 			
-			globalVariables.output = String.format("%-5s %-10s %-15s %-15s %-10s %-15s", "PARENT ID", "PARENT NAME", "PARENT CONTACT", "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
+			globalVariables.output = String.format("%-5s %-10s %-15s %-15s %-10s %-15s\n", "PARENT ID", "PARENT NAME", "PARENT CONTACT", "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
 			
 			for (Parent parent : globalVariables.parentList) {
-				globalVariables.output += String.format("%-5d %-10s %-15s %-15d %-10d %-15d", parent.getParentID(), parent.getParentName(), parent.getParentEmail(), parent.getChildStudentID(), parent.getStudentRegistrationID());
+				globalVariables.output += String.format("%-5d %-10s %-15s %-15d %-10d %-15d\n", parent.getParentID(), parent.getParentName(), parent.getParentEmail(), parent.getChildStudentID(), parent.getStudentRegistrationID());
 				
 			}
 		}
@@ -554,11 +552,11 @@ public class CCAMain {
 		
 		public static void viewStudentsRegisteredForCCA() {
 			
-			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT REGISTRATION ID", "PARENT ID");
+			globalVariables.output = String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s\n", "STUDENT ID", "NAME", "GRADE", "CLASSROOM", "CLASSROOM TEACHER", "SELECTED CCA", "STUDENT REGISTRATION ID", "PARENT ID");
 			
 			for (Student student : globalVariables.studentList) {
 				if (student.getSelectedCCA() != "") {
-					globalVariables.output += String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentRegistrationID(), student.getParentID());
+					globalVariables.output += String.format("%-10s %-10s %-10s %-15s %-20s %-20s %-25s %-10s\n", student.getStudentID(), student.getName(), student.getGrade(), student.getClassroom(), student.getClassroomTeacher(), student.getSelectedCCA(), student.getStudentRegistrationID(), student.getParentID());
 				}
 			}
 		}
