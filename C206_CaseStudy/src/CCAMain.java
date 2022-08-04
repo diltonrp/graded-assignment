@@ -61,38 +61,43 @@ public class CCAMain {
 	//-------------------------------------Start of menu-----------------------------------------------
 	
 	private static void roleMenu() {
-		System.out.println("\nI am a...");
-		System.out.println("1. Teacher");
-		System.out.println("2. CCA Instructor");
-		System.out.println("3. Student");
-		System.out.println("4. Parent");
-		System.out.println("5. I want to quit");
-		int roleSelection = Helper.readInt("Input your selection (1, 2, 3 or 4) > ");
-		
-		while (roleSelection != 4) {
-			if (roleSelection == 1) { // teacher
-				verifyRole("teacher");
-			} else if (roleSelection == 2) { // cca instructor
-				verifyRole("instructor");
-			} else if (roleSelection == 3) { // student
-				verifyRole("student");
-			} else if (roleSelection == 4) { // parent
-				verifyRole("parent");
-			} else if (roleSelection == 5) { // quit
-				System.out.println("Thank you for using our app!");
-				roleSelection = Helper.readInt("");
-			} else { // friendly error message
-				System.out.println("Please enter a valid input");
-				System.out.println("I am a...");
-				System.out.println("1. Teacher");
-				System.out.println("2. CCA Instructor");
-				System.out.println("3. Student");
-				System.out.println("4. Parent");
-				System.out.println("5. I want to quit");
-				roleSelection = Helper.readInt("Input your selection (1, 2, 3 or 4) > ");
-			}
+		System.out.println("I am a...");
+		String[] menu = {"Teacher", "CCA Instructor", "Student", "Parent", "I want to quit"};
+		int i = 1;
+		for (String item : menu) {
+			System.out.println(i + ". " + item);
+			i++;
 		}
 		
+		int roleSelection = Helper.readInt("Input your selection (1, 2, 3 or 4) > ");
+		
+		switch (roleSelection) {
+		case 1: // teacher
+			verifyRole("teacher");
+			break;
+			
+		case 2: // cca instructors
+			verifyRole("instructor");
+			break;
+			
+		case 3: // students
+			verifyRole("student");
+			break;
+			
+		case 4: // parents
+			verifyRole("parent");
+			break;
+			
+		case 5:
+			System.out.println("Thank you for using our app");
+			System.exit(0);
+			break;
+
+		default:
+			System.out.println("Invalid input. Please enter a valid number");
+			roleMenu();
+			break;
+		}
 		
 	}
 	
@@ -181,7 +186,7 @@ public class CCAMain {
 		case 1: // View students for their CCA
 			
 			try {
-				//sql = "SELECT sl.name FROM student_list sl INNER JOIN instructor_list il ON il.CCA = sl.selectedCCA";
+				
 				sql = "SELECT name FROM student_list";
 				rs = statement.executeQuery(sql);
 				
@@ -390,26 +395,26 @@ public class CCAMain {
 	//-------------------------------Adding to array lists--------------------------------------------
 	
 	private static void addStudentsToArray() {
-		try {
-			
-			String sql = "SELECT studentId, name, class, classroomTeacher, selectedCCA FROM student_list ORDER BY class ASC";
-			rs = statement.executeQuery(sql);
-			
-			while (rs.next()) {
-				int studentId = rs.getInt("studentId");
-				String studentName = rs.getString("name");
-				String studentClass = rs.getString("class");
-				String classroomTeacher= rs.getString("classroomTeacher");
-				String selectedCCA = rs.getString("selectedCCA");
-				
-				studentList.add(new Student(studentId, studentName, studentClass, classroomTeacher, selectedCCA));
-			}
-			
-			
-			
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
+//		try {
+//			
+//			String sql = "SELECT studentId, name, class, classroomTeacher, selectedCCA FROM student_list ORDER BY class ASC";
+//			rs = statement.executeQuery(sql);
+//			
+//			while (rs.next()) {
+//				int studentId = rs.getInt("studentId");
+//				String studentName = rs.getString("name");
+//				String studentClass = rs.getString("class");
+//				String classroomTeacher= rs.getString("classroomTeacher");
+//				String selectedCCA = rs.getString("selectedCCA");
+//				
+//				studentList.add(new Student(studentId, studentName, studentClass, classroomTeacher, selectedCCA));
+//			}
+//			
+//			
+//			
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//		}
 	
 	}
 	
@@ -431,9 +436,12 @@ public class CCAMain {
 	public static void addStudent() {
 		
 		int studentId = 0;
-		while (!String.valueOf(studentId).matches("[0-9]+") && !(studentId > 0)) {
+		//while (!String.valueOf(studentId).matches("[0-9]+") && !(studentId > 0)) {
 			studentId = Helper.readInt("Enter your student ID > ");
-		}
+			if (studentId == 3) {
+				roleMenu();
+			}
+		//}
 		
 		/*
 		try {
@@ -455,9 +463,8 @@ public class CCAMain {
 		String sql = "SELECT * FROM student_list";
 		try {
 			rs = statement.executeQuery(sql);
-		
-			String output = String.format("%-5s %-10s %-10s %-20s %-10s\n", 
-					"ID", "NAME", "CLASS", "CLASSROOM TEACHER", "SELECTED CCA");
+			String output = String.format("%-5s %-10s %-10s %-10s %-20s %-15s %-20s %-5s\n", "ID", "NAME", "GRADE", "CLASS", "CLASSROOM TEACHER", "SELECTED CCA", "REGISTRATION ID", "PARENT ID");
+			
 			while (rs.next()) {
 				int id = rs.getInt("studentId");
 				String name = rs.getString("name");
@@ -465,12 +472,10 @@ public class CCAMain {
 				String classroom = rs.getString("class");
 				String classroomTeacher = rs.getString("classroomTeacher");
 				String selectedCCA = rs.getString("selectedCCA");
-				String studentPassword = rs.getString("studentPassword");
 				int registrationID = rs.getInt("studentRegistrationId");
 				int parentID = rs.getInt("parentId");
 				
-				output += String.format("%-5d %-10s %-10s %-20s %-10s %-10s %-10s %-5d %-5d\n", 
-						id, name, grade, classroom, classroomTeacher, selectedCCA, studentPassword, registrationID, parentID);
+				output += String.format("%-5d %-10s %-10s %-10s %-20s %-15s %-20s %-5d\n", id, name, grade, classroom, classroomTeacher, selectedCCA, registrationID, parentID);
 			}
 			System.out.println(output);
 		} catch (SQLException se) {
@@ -519,124 +524,97 @@ public class CCAMain {
 	//-------------------------end of student 3----------------------------
 	//-------------------------student 4 (Yung Jian)-----------------------------------
 	public static void addParentAccount() { //remember to include student account
-//
-//
-//		String jdbcURL = "jdbc:mysql://localhost:3306/c206";
-//		String dbUsername = "root";
-//		String dbPassword = "";
-//
-//		DBUtil.init(jdbcURL, dbUsername, dbPassword);
-//
-//		System.out.println("ADDING PARENT ACCOUNT");
-//		Helper.line(40, "-");
-//		int parentId = Helper.readInt("Enter parent id > ");
-//		String name = Helper.readString("Enter name > ");
-//		String email = Helper.readString("Enter parent email > ");
-//		double contactNumber = Helper.readDouble("Enter contactNumber > ");
-//		String parentPassword = Helper.readString("Enter parent password > ");
-//		int childStudentId = Helper.readInt("Enter your children studen id > ");
-//		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
-//		
-//
-//		for (int p = 0; p<){
-//		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
-//				+ " childStudentId, studentRegistrationId) " 
-//					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
-//				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
-//		int rowsAffected = DBUtil.execSQL(sql);
-//
-////		while (rs.next()) {
-////			int newParentId = rs.getInt("parentId");
-////			String newName = rs.getString("name");
-////			String newEmail = rs.getString("email");
-////			String newContact = rs.getString("contact");
-////			String newParentPassword = rs.getString("parentPassword");
-////			int newChildStudentId = rs.getInt("childStudentId");
-////			int newStudentRegistratitonId = rs.getInt("studentRegistrationId");
-////			
-////			if(parentId == newParentId) {
-//				if(email.contains("@")&(email.contains(".com"))) {
-//					String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
-//							+ " childStudentId, studentRegistrationId) " 
-//							+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
-//							contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
-//					int rowsAffected = DBUtil.execSQL(sql);
-//					
-//					if (rowsAffected == 1) {
-//						System.out.println("Parent added!");
-//					} else {
-//						System.out.println("Insert failed!");
-//					}
-////				}else {
-////					System.out.println("Must enter include @ and .com");
-////				}
-//
-//
-//			DBUtil.close();
-//			}
-//		}
+
+		String jdbcURL = "jdbc:mysql://localhost:3306/c206";
+		String dbUsername = "root";
+		String dbPassword = "";
+
+		DBUtil.init(jdbcURL, dbUsername, dbPassword);
+
+		System.out.println("ADDING PARENT ACCOUNT");
+		Helper.line(40, "-");
+		int parentId = Helper.readInt("Enter parent id > ");
+		String name = Helper.readString("Enter name > ");
+		String email = Helper.readString("Enter parent email > ");
+		double contactNumber = Helper.readDouble("Enter contactNumber > ");
+		String parentPassword = Helper.readString("Enter parent password > ");
+		int childStudentId = Helper.readInt("Enter your children student id > ");
+		int studentRegistrationId = Helper.readInt("Enter student registration id > ");
+		
+		String sql = "INSERT INTO parent_list(parentId, name, email, contact, parentPassword,"
+				+ " childStudentId, studentRegistrationId) " 
+					+ "VALUES ('" +parentId + "', '" +name + "', '" + email + "', '" + 
+				contactNumber + "', '" + parentPassword + "', '" + childStudentId + "', '" + studentRegistrationId + ")";
+		int rowsAffected = DBUtil.execSQL(sql);
+		
+		if (rowsAffected == 1) {
+			System.out.println("Parent added!");
+		} else {
+			System.out.println("Insert failed!");
 		}
-//	
-//	
-	public static void viewRegisteredParents() {
-//try {
-//			
-//			String jdbcURL = "jdbc:mysql://localhost:3306/c206";
-//			String dbUsername = "root";
-//			String dbPassword = "";
-//
-//			DBUtil.init(jdbcURL, dbUsername, dbPassword);
-//
-//			String output = String.format("%-5s %-20s %-10s %-10s %-10s %-10s %-10s \n", "PARENT ID", "NAME", "EMAIL", "CONTACT NUMBER", "PATENT PASSWORD" , "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
-//
-//			String sql = "SELECT *FROM parent_list";
-//			ResultSet rs = DBUtil.getTable(sql);
-//
-//			while (rs.next()) {
-//				
-//				//int parentId = Helper.readInt("Enter parent id > ");
-//				
-//				int newParentId = rs.getInt("parentId");
-//				String newName = rs.getString("name");
-//				String newEmail = rs.getString("email");
-//				String newContact = rs.getString("contact");
-//				String newParentPassword = rs.getString("parentPassword");
-//				int newChildStudentId = rs.getInt("childStudentId");
-//				int newStudentRegistrationId = rs.getInt("studentRegistrationId");
-//				//if(parentId == newParentId) {
-//				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", newParentId, newName, newEmail, newContact, newParentPassword , newChildStudentId, newStudentRegistrationId);
-//				//}
-//				
-//			}
-//			System.out.println(output);
-//
-//		} catch (SQLException se) {
-//			se.printStackTrace();
-//		}
+
+		DBUtil.close();
 	}
-//	
+		
+		
+	
+	
+	public static void viewRegisteredParents() {
+		try {
+			
+			String jdbcURL = "jdbc:mysql://localhost:3306/c206";
+			String dbUsername = "root";
+			String dbPassword = "";
+
+			DBUtil.init(jdbcURL, dbUsername, dbPassword);
+
+			String output = String.format("%-5s %-20s %-10s %-10s %-10s %-10s %-10s \n", "PARENT ID", "NAME", "EMAIL", "CONTACT NUMBER", "PATENT PASSWORD" , "CHILD STUDENT ID", "STUDENT REGISTRATION ID");
+
+			String sql = "SELECT *FROM parent_list";
+			ResultSet rs = DBUtil.getTable(sql);
+
+			while (rs.next()) {
+				
+				int newParentId = rs.getInt("parentId");
+				String newName = rs.getString("name");
+				String newEmail = rs.getString("email");
+				String newContact = rs.getString("contact");
+				String newParentPassword = rs.getString("parentPassword");
+				int newChildStudentId = rs.getInt("childStudentId");
+				int newStudentRegistrationId = rs.getInt("studentRegistrationId");
+				
+				output = String.format("%-5d %-20s %-10s %-10d %-10s %-10d %-10d \n", newParentId, newName, newEmail, newContact, newParentPassword , newChildStudentId, newStudentRegistrationId);
+				
+			}
+			System.out.println(output);
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+	}
+	
 	public static void deleteParent() {
-//		String jdbcURL = "jdbc:mysql://localhost/c206";
-//		String dbUsername = "root";
-//		String dbPassword = "";
-//
-//		DBUtil.init(jdbcURL, dbUsername, dbPassword);
-//
-//		System.out.println("DELETING PARENT");
-//		Helper.line(40, "-");
-//
-//		int parentId = Helper.readInt("Enter parent id > ");
-//
-//		String deleteSQL = "DELETE FROM student WHERE parentId='" + parentId + "'";
-//		int rowsAffected = DBUtil.execSQL(deleteSQL);
-//
-//		if (rowsAffected == 1) {
-//			System.out.println("Parent deleted!");
-//		} else {
-//			System.out.println("Delete failed!");
-//		}
-//
-//		DBUtil.close();
+		String jdbcURL = "jdbc:mysql://localhost/c206";
+		String dbUsername = "root";
+		String dbPassword = "";
+
+		DBUtil.init(jdbcURL, dbUsername, dbPassword);
+
+		System.out.println("DELETING PARENT");
+		Helper.line(40, "-");
+
+		int parentId = Helper.readInt("Enter parent id > ");
+
+		String deleteSQL = "DELETE FROM student WHERE parentId='" + parentId + "'";
+		int rowsAffected = DBUtil.execSQL(deleteSQL);
+
+		if (rowsAffected == 1) {
+			System.out.println("Parent deleted!");
+		} else {
+			System.out.println("Delete failed!");
+		}
+
+		DBUtil.close();
 	}
 	//-------------------------end of student 4----------------------------
 	//-------------------------student 5 (Ze Yu)-----------------------------------
