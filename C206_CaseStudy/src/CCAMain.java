@@ -23,18 +23,22 @@ public class CCAMain {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CCAMain ccaMain = new CCAMain();
-		ccaMain.dbConnection();
-		
-		// initial array loading
-		addStudentsToArray();
-
-		// start of menu
-		System.out.println("Welcome to Woodleys Primary School!");
-		System.out.println("Select your CCA according to your preferences. Have fun!");
-		Helper.line(80, "=");
-		
-		roleMenu();
+		try {
+			CCAMain ccaMain = new CCAMain();//on ic ah
+			ccaMain.dbConnection();
+			
+			// initial array loading
+			addStudentsToArray();
+	
+			// start of menu
+			System.out.println("Welcome to Woodleys Primary School!");
+			System.out.println("Select your CCA according to your preferences. Have fun!");
+			Helper.line(80, "=");
+			
+			roleMenu();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 	
@@ -448,11 +452,43 @@ public class CCAMain {
 	}
 	
 	public static void viewAllStudents() {
+		String sql = "SELECT * FROM student_list";
+		try {
+			rs = statement.executeQuery(sql);
 		
+			String output = String.format("%-5s %-10s %-10s %-20s %-10s\n", 
+					"ID", "NAME", "CLASS", "CLASSROOM TEACHER", "SELECTED CCA");
+			while (rs.next()) {
+				int id = rs.getInt("studentId");
+				String name = rs.getString("name");
+				String grade = rs.getString("grade");
+				String classroom = rs.getString("class");
+				String classroomTeacher = rs.getString("classroomTeacher");
+				String selectedCCA = rs.getString("selectedCCA");
+				String studentPassword = rs.getString("studentPassword");
+				int registrationID = rs.getInt("studentRegistrationId");
+				int parentID = rs.getInt("parentId");
+				
+				output += String.format("%-5d %-10s %-10s %-20s %-10s %-10s %-10s %-5d %-5d\n", 
+						id, name, grade, classroom, classroomTeacher, selectedCCA, studentPassword, registrationID, parentID);
+			}
+			System.out.println(output);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	public static void deleteStudent() {
+		int deleteID = Helper.readInt("Enter the student ID to delete");
+		String sql = "DELETE FROM student_list WHERE studentId='" + deleteID + "'";
 		
+		try {
+			rs = statement.executeQuery(sql);
+			
+			System.out.println("Removed Student with student ID " + deleteID);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	//-------------------------end of student 1----------------------------
 	//-------------------------student 2 (Lela)-----------------------------------
@@ -482,7 +518,7 @@ public class CCAMain {
 	}
 	//-------------------------end of student 3----------------------------
 	//-------------------------student 4 (Yung Jian)-----------------------------------
-//	public static void addParentAccount() { //remember to include student account
+	public static void addParentAccount() { //remember to include student account
 //
 //
 //		String jdbcURL = "jdbc:mysql://localhost:3306/c206";
@@ -539,10 +575,10 @@ public class CCAMain {
 //			DBUtil.close();
 //			}
 //		}
-//		}
+		}
 //	
 //	
-//	public static void viewRegisteredParents() {
+	public static void viewRegisteredParents() {
 //try {
 //			
 //			String jdbcURL = "jdbc:mysql://localhost:3306/c206";
@@ -577,9 +613,9 @@ public class CCAMain {
 //		} catch (SQLException se) {
 //			se.printStackTrace();
 //		}
-//	}
+	}
 //	
-//	public static void deleteParent() {
+	public static void deleteParent() {
 //		String jdbcURL = "jdbc:mysql://localhost/c206";
 //		String dbUsername = "root";
 //		String dbPassword = "";
@@ -601,23 +637,90 @@ public class CCAMain {
 //		}
 //
 //		DBUtil.close();
-//	}
+	}
 	//-------------------------end of student 4----------------------------
 	//-------------------------student 5 (Ze Yu)-----------------------------------
-	public static void studentLogin() { // login with student and CCA registration ID
+	public static void studentLogin() { // login with student and CCA registration ID OK try again
+		int idInput = Helper.readInt("Enter your Student ID");
+		String passwordInput = Helper.readString("Enter your student Password");
+		String sql = "SELECT studentPassword, studentId FROM student_list";
 		
+		try {
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) {
+				if (rs.getInt("studentId") == idInput && rs.getString("studentPassword").equals(passwordInput)) {
+					studentMenu();
+				}
+				else {
+					System.out.println("Wrong Student ID or Password!");//It says unable to find or execute CCAMain
+				}
+			}
+		} catch (SQLException se){
+			se.printStackTrace();
+		}
+ 		
 	}
 	
 	public static void parentLogin() {
+		int idInput = Helper.readInt("Enter your Parent ID");
+		String passwordInput = Helper.readString("Enter your student Password");
+		String sql = "SELECT parentId, parentPassword FROM parent_list";
 		
+		try {
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) {
+				if (rs.getInt("parentId") == idInput && rs.getString("parentPassword").equals(passwordInput)) {
+					parentMenu();
+				}
+				else {
+					System.out.println("Wrong Parent ID or Password!");
+				}
+			}
+		} catch (SQLException se){
+			se.printStackTrace();
+		}
 	}
 	
 	public static void addStudentForCCA(String studentOrParent) {
-		
+		int studentId = 0;
+		String joinCCA = Helper.readString("Enter the CCA you would like to join");
+		String sql = "UPDATE student_list SET selectedCCA='" + joinCCA + "' WHERE studentId='" + studentId + "'";
+		try {
+			rs = statement.executeQuery(sql);
+			
+			System.out.println("CCA Selected Successful!");
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	public static void viewStudentsRegisteredForCCA() {
+		String sql = "SELECT * FROM student_list WHERE selectedCCA IS NOT NULL";
+		try {
+			rs = statement.executeQuery(sql);
 		
+			String output = String.format("%-5s %-10s %-10s %-20s %-10s\n", 
+					"ID", "NAME", "CLASS", "CLASSROOM TEACHER", "SELECTED CCA");
+			while (rs.next()) {
+				int id = rs.getInt("studentId");
+				String name = rs.getString("name");
+				String grade = rs.getString("grade");
+				String classroom = rs.getString("class");
+				String classroomTeacher = rs.getString("classroomTeacher");
+				String selectedCCA = rs.getString("selectedCCA");
+				String studentPassword = rs.getString("studentPassword");
+				int registrationID = rs.getInt("studentRegistrationId");
+				int parentID = rs.getInt("parentId");
+				
+				output += String.format("%-5d %-10s %-10s %-20s %-10s %-10s %-10s %-5d %-5d\n", 
+						id, name, grade, classroom, classroomTeacher, selectedCCA, studentPassword, registrationID, parentID);
+			}
+			System.out.println(output);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 }
