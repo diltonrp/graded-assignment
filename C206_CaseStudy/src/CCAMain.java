@@ -696,9 +696,9 @@ public class CCAMain {
 						id, name, grade, classroom, classroomTeacher, selectedCCA, studentPassword, registrationID, parentID);
 			}
 			System.out.println(output);
-		} catch (SQLException se) {
+		} catch (SQLException se) {s
 			se.printStackTrace();
 		}
 	}
-	
+	//test zeyu
 }
