@@ -9,6 +9,7 @@ public class CCAMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		addToArray();
+		roleMenu();
 	}
 	
 	private static void addToArray() {
@@ -75,7 +76,7 @@ public class CCAMain {
 		
 	}
 	
-private static void teacherMenu() {
+	private static void teacherMenu() {
 		
 		String[] menuItems = {"View all students", "View all students with CCA", "Add student", "Delete student", "View all CCA categories", "Add CCA category", "Delete CCA category", "View registered parents", "Add parent", "Delete parent", "Add student for CCA", "Back to home"};
 
