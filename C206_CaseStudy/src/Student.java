@@ -1,57 +1,65 @@
+
+
 public class Student {
-	private int studentId;
-	private String studentName;
-	private String studentClass;
-	private String classroomTeacher;
-	private String selectedCCA;
+	int studentID;
+	String name;
+	char grade;
+	String classroom;
+	String classroomTeacher;
+	String selectedCCA;
+	String studentPassword;
+	int studentRegistrationID;
+	int parentID;
 	
-	public Student(int studentId, String studentName, String studentClass, String classroomTeacher, String selectedCCA) {
-		this.studentId = studentId;
-		this.studentName = studentName;
-		this.studentClass = studentClass;
+	public Student(int studentID, String name, char grade, String classroom, String classroomTeacher, String selectedCCA, String studentPassword, int studentRegistrationID, int parentID) {
+		this.studentID = studentID;
+		this.name = name;
+		this.grade = grade;
+		this.classroom = classroom;
 		this.classroomTeacher = classroomTeacher;
 		this.selectedCCA = selectedCCA;
+		this.studentPassword = studentPassword;
+		this.studentRegistrationID = studentRegistrationID;
+		this.parentID = parentID;
 	}
 
-	public int getStudentId() {
-		return studentId;
+	public int getStudentID() {
+		return studentID;
 	}
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public String getName() {
+		return name;
 	}
 
-	public String getStudentName() {
-		return studentName;
+	public char getGrade() {
+		return grade;
 	}
 
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
-	}
-
-	public String getStudentClass() {
-		return studentClass;
-	}
-
-	public void setStudentClass(String studentClass) {
-		this.studentClass = studentClass;
+	public String getClassroom() {
+		return classroom;
 	}
 
 	public String getClassroomTeacher() {
 		return classroomTeacher;
 	}
 
-	public void setClassroomTeacher(String classroomTeacher) {
-		this.classroomTeacher = classroomTeacher;
-	}
-
 	public String getSelectedCCA() {
 		return selectedCCA;
 	}
-
+	
 	public void setSelectedCCA(String selectedCCA) {
 		this.selectedCCA = selectedCCA;
 	}
-	
-	
+
+	public String getStudentPassword() {
+		return studentPassword;
+	}
+
+	public int getStudentRegistrationID() {
+		return studentRegistrationID;
+	}
+
+	public int getParentID() {
+		return parentID;
+	}
 }
